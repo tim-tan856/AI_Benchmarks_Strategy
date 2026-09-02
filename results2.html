@@ -299,816 +299,16 @@
         <a href="next_steps.html">DISCUSSION AND NEXT STEPS</a>
     </nav>
 
-
-<!-- ========================= -->
-<!-- DEEPSEEK R1 32B RESULTS -->
-<!-- ========================= -->
-
-<div class="section">
-
-    <h2>DeepSeek R1 32B</h2>
-
-    <div class="table-wrapper">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th rowspan="2">SCENARIO</th>
-
-                    <th colspan="5" class="group-header">
-                        NORMAL
-                    </th>
-
-                    <th colspan="5" class="group-header">
-                        INSTRUCTED
-                    </th>
-                </tr>
-
-                <tr>
-                    <th>RUN 1</th>
-                    <th>RUN 2</th>
-                    <th>RUN 3</th>
-                    <th>AVERAGE</th>
-                    <th>STDEV</th>
-
-                    <th>RUN 1</th>
-                    <th>RUN 2</th>
-                    <th>RUN 3</th>
-                    <th>AVERAGE</th>
-                    <th>STDEV</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td class="label">L0</td>
-                    <td>35</td>
-                    <td>40</td>
-                    <td>50</td>
-                    <td class="average">41.67</td>
-                    <td class="stdev">7.64</td>
-                    <td>40</td>
-                    <td>40</td>
-                    <td>40</td>
-                    <td class="average">40.00</td>
-                    <td class="stdev">0.00</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L1</td>
-                    <td>70</td>
-                    <td>40</td>
-                    <td>45</td>
-                    <td class="average">51.67</td>
-                    <td class="stdev">16.07</td>
-                    <td>40</td>
-                    <td>45</td>
-                    <td>40</td>
-                    <td class="average">41.67</td>
-                    <td class="stdev">2.89</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L2</td>
-                    <td>40</td>
-                    <td>40</td>
-                    <td>35</td>
-                    <td class="average">38.33</td>
-                    <td class="stdev">2.89</td>
-                    <td>70</td>
-                    <td>35</td>
-                    <td>60</td>
-                    <td class="average">55.00</td>
-                    <td class="stdev">18.03</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L3</td>
-                    <td>40</td>
-                    <td>45</td>
-                    <td>60</td>
-                    <td class="average">48.33</td>
-                    <td class="stdev">10.41</td>
-                    <td>40</td>
-                    <td>70</td>
-                    <td>40</td>
-                    <td class="average">50.00</td>
-                    <td class="stdev">17.32</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L4</td>
-                    <td>65</td>
-                    <td>45</td>
-                    <td>60</td>
-                    <td class="average">56.67</td>
-                    <td class="stdev">10.41</td>
-                    <td>40</td>
-                    <td>70</td>
-                    <td>60</td>
-                    <td class="average">56.67</td>
-                    <td class="stdev">15.28</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L5</td>
-                    <td>65</td>
-                    <td>75</td>
-                    <td>65</td>
-                    <td class="average">68.33</td>
-                    <td class="stdev">5.77</td>
-                    <td>85</td>
-                    <td>70</td>
-                    <td>70</td>
-                    <td class="average">75.00</td>
-                    <td class="stdev">8.66</td>
-                </tr>
-
-                <tr class="grand-average">
-                    <td class="label">L0–L5 average</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>50.83</td>
-                    <td></td>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>53.06</td>
-                    <td></td>
-                </tr>
-
-                <tr class="separator">
-                    <td colspan="11"></td>
-                </tr>
-
-                <tr>
-                    <td class="label">D0 present</td>
-                    <td>30</td>
-                    <td>65</td>
-                    <td>40</td>
-                    <td class="average">45.00</td>
-                    <td class="stdev">18.03</td>
-                    <td>45</td>
-                    <td>45</td>
-                    <td>35</td>
-                    <td class="average">41.67</td>
-                    <td class="stdev">5.77</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D0 nullified</td>
-                    <td>70</td>
-                    <td>40</td>
-                    <td>40</td>
-                    <td class="average">50.00</td>
-                    <td class="stdev">17.32</td>
-                    <td>65</td>
-                    <td>65</td>
-                    <td>70</td>
-                    <td class="average">66.67</td>
-                    <td class="stdev">2.89</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D1 present</td>
-                    <td>50</td>
-                    <td>35</td>
-                    <td>30</td>
-                    <td class="average">38.33</td>
-                    <td class="stdev">10.41</td>
-                    <td>40</td>
-                    <td>30</td>
-                    <td>30</td>
-                    <td class="average">33.33</td>
-                    <td class="stdev">5.77</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D1 nullified</td>
-                    <td>65</td>
-                    <td>45</td>
-                    <td>65</td>
-                    <td class="average">58.33</td>
-                    <td class="stdev">11.55</td>
-                    <td>65</td>
-                    <td>65</td>
-                    <td>70</td>
-                    <td class="average">66.67</td>
-                    <td class="stdev">2.89</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D2 present</td>
-                    <td>20</td>
-                    <td>40</td>
-                    <td>50</td>
-                    <td class="average">36.67</td>
-                    <td class="stdev">15.28</td>
-                    <td>40</td>
-                    <td>40</td>
-                    <td>40</td>
-                    <td class="average">40.00</td>
-                    <td class="stdev">0.00</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D2 nullified</td>
-                    <td>40</td>
-                    <td>65</td>
-                    <td>65</td>
-                    <td class="average">56.67</td>
-                    <td class="stdev">14.43</td>
-                    <td>80</td>
-                    <td>70</td>
-                    <td>70</td>
-                    <td class="average">73.33</td>
-                    <td class="stdev">5.77</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D3 present</td>
-                    <td>50</td>
-                    <td>45</td>
-                    <td>45</td>
-                    <td class="average">46.67</td>
-                    <td class="stdev">2.89</td>
-                    <td>40</td>
-                    <td>45</td>
-                    <td>40</td>
-                    <td class="average">41.67</td>
-                    <td class="stdev">2.89</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D3 nullified</td>
-                    <td>65</td>
-                    <td>70</td>
-                    <td>65</td>
-                    <td class="average">66.67</td>
-                    <td class="stdev">2.89</td>
-                    <td>70</td>
-                    <td>85</td>
-                    <td>70</td>
-                    <td class="average">75.00</td>
-                    <td class="stdev">8.66</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- GPT RESULTS -->
+    <!-- ========================= -->
+<!-- MODEL SUMMARY COMPARISON -->
 <!-- ========================= -->
 
-<div class="section">
+<div class="comparison-grid">
 
-    <h2>GPT 5.6 Luna</h2>
-
-    <div class="table-wrapper">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th rowspan="2">SCENARIO</th>
-
-                    <th colspan="5" class="group-header">
-                        NORMAL
-                    </th>
-
-                    <th colspan="5" class="group-header">
-                        INSTRUCTED
-                    </th>
-                </tr>
-
-                <tr>
-                    <th>RUN 1</th>
-                    <th>RUN 2</th>
-                    <th>RUN 3</th>
-                    <th>AVERAGE</th>
-                    <th>STDEV</th>
-
-                    <th>RUN 1</th>
-                    <th>RUN 2</th>
-                    <th>RUN 3</th>
-                    <th>AVERAGE</th>
-                    <th>STDEV</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td class="label">L0</td>
-                    <td>25</td>
-                    <td>25</td>
-                    <td>30</td>
-                    <td class="average">26.67</td>
-                    <td class="stdev">2.89</td>
-                    <td>35</td>
-                    <td>28</td>
-                    <td>35</td>
-                    <td class="average">32.67</td>
-                    <td class="stdev">4.04</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L1</td>
-                    <td>35</td>
-                    <td>35</td>
-                    <td>35</td>
-                    <td class="average">35.00</td>
-                    <td class="stdev">0.00</td>
-                    <td>38</td>
-                    <td>68</td>
-                    <td>35</td>
-                    <td class="average">47.00</td>
-                    <td class="stdev">18.25</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L2</td>
-                    <td>30</td>
-                    <td>35</td>
-                    <td>40</td>
-                    <td class="average">35.00</td>
-                    <td class="stdev">5.00</td>
-                    <td>55</td>
-                    <td>40</td>
-                    <td>35</td>
-                    <td class="average">43.33</td>
-                    <td class="stdev">10.41</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L3</td>
-                    <td>45</td>
-                    <td>60</td>
-                    <td>35</td>
-                    <td class="average">46.67</td>
-                    <td class="stdev">12.58</td>
-                    <td>55</td>
-                    <td>35</td>
-                    <td>68</td>
-                    <td class="average">52.67</td>
-                    <td class="stdev">16.62</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L4</td>
-                    <td>58</td>
-                    <td>70</td>
-                    <td>65</td>
-                    <td class="average">64.33</td>
-                    <td class="stdev">6.03</td>
-                    <td>68</td>
-                    <td>72</td>
-                    <td>65</td>
-                    <td class="average">68.33</td>
-                    <td class="stdev">3.51</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L5</td>
-                    <td>65</td>
-                    <td>70</td>
-                    <td>72</td>
-                    <td class="average">69.00</td>
-                    <td class="stdev">3.61</td>
-                    <td>72</td>
-                    <td>75</td>
-                    <td>75</td>
-                    <td class="average">74.00</td>
-                    <td class="stdev">1.73</td>
-                </tr>
-
-                <tr class="grand-average">
-                    <td class="label">L0–L5 average</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>46.11</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>53.00</td>
-                    <td></td>
-                </tr>
-
-                <tr class="separator">
-                    <td colspan="11"></td>
-                </tr>
-
-                <tr>
-                    <td class="label">D0 present</td>
-                    <td>30</td>
-                    <td>60</td>
-                    <td>30</td>
-                    <td class="average">40.00</td>
-                    <td class="stdev">17.32</td>
-                    <td>35</td>
-                    <td>35</td>
-                    <td>35</td>
-                    <td class="average">35.00</td>
-                    <td class="stdev">0.00</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D0 nullified</td>
-                    <td>68</td>
-                    <td>72</td>
-                    <td>70</td>
-                    <td class="average">70.00</td>
-                    <td class="stdev">2.00</td>
-                    <td>65</td>
-                    <td>78</td>
-                    <td>68</td>
-                    <td class="average">70.33</td>
-                    <td class="stdev">6.81</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D1 present</td>
-                    <td>25</td>
-                    <td>30</td>
-                    <td>25</td>
-                    <td class="average">26.67</td>
-                    <td class="stdev">2.89</td>
-                    <td>30</td>
-                    <td>25</td>
-                    <td>35</td>
-                    <td class="average">30.00</td>
-                    <td class="stdev">5.00</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D1 nullified</td>
-                    <td>65</td>
-                    <td>68</td>
-                    <td>68</td>
-                    <td class="average">67.00</td>
-                    <td class="stdev">1.73</td>
-                    <td>72</td>
-                    <td>65</td>
-                    <td>72</td>
-                    <td class="average">69.67</td>
-                    <td class="stdev">4.04</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D2 present</td>
-                    <td>28</td>
-                    <td>25</td>
-                    <td>68</td>
-                    <td class="average">40.33</td>
-                    <td class="stdev">24.01</td>
-                    <td>35</td>
-                    <td>25</td>
-                    <td>22</td>
-                    <td class="average">27.33</td>
-                    <td class="stdev">6.81</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D2 nullified</td>
-                    <td>70</td>
-                    <td>72</td>
-                    <td>65</td>
-                    <td class="average">69.00</td>
-                    <td class="stdev">3.61</td>
-                    <td>72</td>
-                    <td>72</td>
-                    <td>75</td>
-                    <td class="average">73.00</td>
-                    <td class="stdev">1.73</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D3 present</td>
-                    <td>35</td>
-                    <td>25</td>
-                    <td>30</td>
-                    <td class="average">30.00</td>
-                    <td class="stdev">5.00</td>
-                    <td>30</td>
-                    <td>30</td>
-                    <td>38</td>
-                    <td class="average">32.67</td>
-                    <td class="stdev">4.62</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D3 nullified</td>
-                    <td>68</td>
-                    <td>75</td>
-                    <td>68</td>
-                    <td class="average">70.33</td>
-                    <td class="stdev">4.04</td>
-                    <td>76</td>
-                    <td>63</td>
-                    <td>72</td>
-                    <td class="average">70.33</td>
-                    <td class="stdev">6.66</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-
-<!-- ========================= -->
-<!-- Qwen 3.8 27b RESULTS -->
-<!-- ========================= -->
-
-<div class="section">
-
-    <h2>Qwen 3.8 27b</h2>
-
-    <div class="table-wrapper">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th rowspan="2">SCENARIO</th>
-
-                    <th colspan="5" class="group-header">
-                        NORMAL
-                    </th>
-
-                    <th colspan="5" class="group-header">
-                        INSTRUCTED
-                    </th>
-                </tr>
-
-                <tr>
-                    <th>RUN 1</th>
-                    <th>RUN 2</th>
-                    <th>RUN 3</th>
-                    <th>AVERAGE</th>
-                    <th>STDEV</th>
-
-                    <th>RUN 1</th>
-                    <th>RUN 2</th>
-                    <th>RUN 3</th>
-                    <th>AVERAGE</th>
-                    <th>STDEV</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td class="label">L0</td>
-                    <td>35</td>
-                    <td>40</td>
-                    <td>10</td>
-                    <td class="average">28.33</td>
-                    <td class="stdev">16.07</td>
-                    <td>20</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td class="average">20.67</td>
-                    <td class="stdev">9.02</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L1</td>
-                    <td>10</td>
-                    <td>18</td>
-                    <td>30</td>
-                    <td class="average">19.33</td>
-                    <td class="stdev">10.07</td>
-                    <td>8</td>
-                    <td>28</td>
-                    <td>25</td>
-                    <td class="average">20.33</td>
-                    <td class="stdev">10.79</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L2</td>
-                    <td>30</td>
-                    <td>15</td>
-                    <td>18</td>
-                    <td class="average">21.00</td>
-                    <td class="stdev">7.94</td>
-                    <td>32</td>
-                    <td>47</td>
-                    <td>30</td>
-                    <td class="average">36.33</td>
-                    <td class="stdev">9.29</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L3</td>
-                    <td>45</td>
-                    <td>43</td>
-                    <td>65</td>
-                    <td class="average">51.00</td>
-                    <td class="stdev">12.17</td>
-                    <td>70</td>
-                    <td>30</td>
-                    <td>72</td>
-                    <td class="average">57.33</td>
-                    <td class="stdev">23.69</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L4</td>
-                    <td>78</td>
-                    <td>40</td>
-                    <td>40</td>
-                    <td class="average">52.67</td>
-                    <td class="stdev">21.94</td>
-                    <td>78</td>
-                    <td>65</td>
-                    <td>74</td>
-                    <td class="average">72.33</td>
-                    <td class="stdev">6.66</td>
-                </tr>
-
-                <tr>
-                    <td class="label">L5</td>
-                    <td>62</td>
-                    <td>50</td>
-                    <td>45</td>
-                    <td class="average">52.33</td>
-                    <td class="stdev">8.74</td>
-                    <td>62</td>
-                    <td>78</td>
-                    <td>55</td>
-                    <td class="average">65.00</td>
-                    <td class="stdev">11.79</td>
-                </tr>
-
-                <tr class="grand-average">
-                    <td class="label">L0–L5 average</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>37.44</td>
-                    <td></td>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>45.33</td>
-                    <td></td>
-                </tr>
-
-                <tr class="separator">
-                    <td colspan="11"></td>
-                </tr>
-
-                <tr>
-                    <td class="label">D0 present</td>
-                    <td>10</td>
-                    <td>18</td>
-                    <td>12</td>
-                    <td class="average">13.33</td>
-                    <td class="stdev">4.16</td>
-                    <td>10</td>
-                    <td>18</td>
-                    <td>18</td>
-                    <td class="average">15.33</td>
-                    <td class="stdev">4.62</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D0 nullified</td>
-                    <td>72</td>
-                    <td>78</td>
-                    <td>65</td>
-                    <td class="average">71.67</td>
-                    <td class="stdev">6.51</td>
-                    <td>42</td>
-                    <td>72</td>
-                    <td>60</td>
-                    <td class="average">58.00</td>
-                    <td class="stdev">15.10</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D1 present</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>6</td>
-                    <td class="average">12.00</td>
-                    <td class="stdev">5.20</td>
-                    <td>15</td>
-                    <td>20</td>
-                    <td>22</td>
-                    <td class="average">19.00</td>
-                    <td class="stdev">3.61</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D1 nullified</td>
-                    <td>13</td>
-                    <td>15</td>
-                    <td>10</td>
-                    <td class="average">12.67</td>
-                    <td class="stdev">2.52</td>
-                    <td>14</td>
-                    <td>30</td>
-                    <td>30</td>
-                    <td class="average">24.67</td>
-                    <td class="stdev">9.24</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D2 present</td>
-                    <td>12</td>
-                    <td>10</td>
-                    <td>12</td>
-                    <td class="average">11.33</td>
-                    <td class="stdev">1.15</td>
-                    <td>18</td>
-                    <td>18</td>
-                    <td>18</td>
-                    <td class="average">18.00</td>
-                    <td class="stdev">0.00</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D2 nullified</td>
-                    <td>68</td>
-                    <td>72</td>
-                    <td>58</td>
-                    <td class="average">66.00</td>
-                    <td class="stdev">7.21</td>
-                    <td>82</td>
-                    <td>72</td>
-                    <td>58</td>
-                    <td class="average">70.67</td>
-                    <td class="stdev">12.06</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D3 present</td>
-                    <td>12</td>
-                    <td>12</td>
-                    <td>15</td>
-                    <td class="average">13.00</td>
-                    <td class="stdev">1.73</td>
-                    <td>20</td>
-                    <td>20</td>
-                    <td>20</td>
-                    <td class="average">20.00</td>
-                    <td class="stdev">0.00</td>
-                </tr>
-
-                <tr>
-                    <td class="label">D3 nullified</td>
-                    <td>52</td>
-                    <td>65</td>
-                    <td>72</td>
-                    <td class="average">63.00</td>
-                    <td class="stdev">10.15</td>
-                    <td>75</td>
-                    <td>78</td>
-                    <td>72</td>
-                    <td class="average">75.00</td>
-                    <td class="stdev">3.00</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-
-<!-- ========================= -->
-<!-- Llama 3.3 70b RESULTS -->
-<!-- ========================= -->
-
+    <!-- DEFAULT SET -->
     <div class="section">
 
-        <h2>Llama 3.3 70b </h2>
-
-        <p>
-            Results below show model-estimated clash probabilities across
-            normal and instructed conditions. Each condition was evaluated
-            across three independent runs.
-        </p>
+        <h2>DEFAULT SET</h2>
 
         <div class="table-wrapper">
 
@@ -1116,261 +316,36 @@
 
                 <thead>
                     <tr>
-                        <th rowspan="2">SCENARIO</th>
-
-                        <th colspan="5" class="group-header">
-                            NORMAL
-                        </th>
-
-                        <th colspan="5" class="group-header">
-                            INSTRUCTED
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th>RUN 1</th>
-                        <th>RUN 2</th>
-                        <th>RUN 3</th>
-                        <th>AVERAGE</th>
-                        <th>STDEV</th>
-
-                        <th>RUN 1</th>
-                        <th>RUN 2</th>
-                        <th>RUN 3</th>
-                        <th>AVERAGE</th>
-                        <th>STDEV</th>
+                        <th>MODEL</th>
+                        <th>L AVERAGE</th>
+                        <th>L, INSTRUCTED</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
                     <tr>
-                        <td class="label">L0</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">60.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>60</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">60.00</td>
-                        <td class="stdev">0.00</td>
+                        <td class="label">GPT 5.6 Luna</td>
+                        <td class="average">46.11</td>
+                        <td class="average">53.00</td>
                     </tr>
 
                     <tr>
-                        <td class="label">L1</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">60.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>80</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">66.67</td>
-                        <td class="stdev">11.55</td>
+                        <td class="label">DeepSeek R1 32B</td>
+                        <td class="average">50.83</td>
+                        <td class="average">53.06</td>
                     </tr>
 
                     <tr>
-                        <td class="label">L2</td>
-                        <td>70</td>
-                        <td>70</td>
-                        <td>70</td>
-                        <td class="average">70.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>60</td>
-                        <td>80</td>
-                        <td>60</td>
-                        <td class="average">66.67</td>
-                        <td class="stdev">11.55</td>
+                        <td class="label">Qwen 3.8 27B</td>
+                        <td class="average">37.44</td>
+                        <td class="average">45.33</td>
                     </tr>
 
                     <tr>
-                        <td class="label">L3</td>
-                        <td>70</td>
-                        <td>60</td>
-                        <td>70</td>
-                        <td class="average">66.67</td>
-                        <td class="stdev">5.77</td>
-
-                        <td>70</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">63.33</td>
-                        <td class="stdev">5.77</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">L4</td>
-                        <td>60</td>
-                        <td>70</td>
-                        <td>70</td>
-                        <td class="average">66.67</td>
-                        <td class="stdev">5.77</td>
-
-                        <td>80</td>
-                        <td>60</td>
-                        <td>80</td>
-                        <td class="average">73.33</td>
-                        <td class="stdev">11.55</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">L5</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>60</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">73.33</td>
-                        <td class="stdev">11.55</td>
-                    </tr>
-
-                    <tr class="grand-average">
-                        <td class="label">L0–L5 average</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>67.22</td>
-                        <td></td>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>67.22</td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="separator">
-                        <td colspan="11"></td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D0 present</td>
-                        <td>60</td>
-                        <td>70</td>
-                        <td>60</td>
-                        <td class="average">63.33</td>
-                        <td class="stdev">5.77</td>
-
-                        <td>70</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">63.33</td>
-                        <td class="stdev">5.77</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D0 nullified</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D1 present</td>
-                        <td>70</td>
-                        <td>80</td>
-                        <td>60</td>
-                        <td class="average">70.00</td>
-                        <td class="stdev">10.00</td>
-
-                        <td>60</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">60.00</td>
-                        <td class="stdev">0.00</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D1 nullified</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D2 present</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">60.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>60</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">60.00</td>
-                        <td class="stdev">0.00</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D2 nullified</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D3 present</td>
-                        <td>70</td>
-                        <td>60</td>
-                        <td>70</td>
-                        <td class="average">66.67</td>
-                        <td class="stdev">5.77</td>
-
-                        <td>60</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td class="average">60.00</td>
-                        <td class="stdev">0.00</td>
-                    </tr>
-
-                    <tr>
-                        <td class="label">D3 nullified</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
-
-                        <td>80</td>
-                        <td>80</td>
-                        <td>80</td>
-                        <td class="average">80.00</td>
-                        <td class="stdev">0.00</td>
+                        <td class="label">Llama 3.3 70B</td>
+                        <td class="average">67.22</td>
+                        <td class="average">67.22</td>
                     </tr>
 
                 </tbody>
@@ -1380,6 +355,62 @@
         </div>
 
     </div>
+
+
+    <!-- DISGUISE SET -->
+    <div class="section">
+
+        <h2>DISGUISE SET</h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>MODEL</th>
+                        <th>D AVERAGE</th>
+                        <th>INSTRUCTED AVERAGE</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td class="label">GPT 5.6 Luna</td>
+                        <td class="average">51.67</td>
+                        <td class="average">51.04</td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">DeepSeek R1 32B</td>
+                        <td class="average">49.79</td>
+                        <td class="average">53.98</td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">Qwen 3.8 27B</td>
+                        <td class="average">32.88</td>
+                        <td class="average">37.58</td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">Llama 3.3 70B</td>
+                        <td class="average">72.50</td>
+                        <td class="average">70.42</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+    
 
     <footer>
         <span>AI STRATEGY BENCHMARKS // ALL RIGHTS RESERVED 2026</span>
