@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Strategy Benchmarks</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #080b09;
+            color: #b8c7bd;
+            font-family: "Courier New", monospace;
+            min-height: 100vh;
+        }
+
+        /* Subtle cyber background */
+        #matrix {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.07;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        header {
+            border-bottom: 1px solid #496653;
+            padding-bottom: 25px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            letter-spacing: 2px;
+            margin: 0 0 10px;
+            color: #d5e2d8;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #7f9585;
+        }
+
+        nav {
+            display: flex;
+            border: 1px solid #34463a;
+            margin-bottom: 25px;
+            background: rgba(10, 14, 11, 0.9);
+        }
+
+        nav a {
+            color: #8faa96;
+            text-decoration: none;
+            padding: 14px 22px;
+            border-right: 1px solid #34463a;
+            font-size: 13px;
+        }
+
+        nav a:hover {
+            background: #25342a;
+            color: #d5e2d8;
+        }
+
+        .section {
+            background: rgba(11, 15, 12, 0.94);
+            border: 1px solid #34463a;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 18px rgba(50, 80, 60, 0.08);
+        }
+
+        .section h2 {
+            font-size: 18px;
+            margin-top: 0;
+            color: #a8bbaa;
+            letter-spacing: 1px;
+        }
+
+        .section p {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* Featured research statement */
+        .opening {
+            border: 1px solid #5c7a64;
+            background: rgba(16, 22, 18, 0.97);
+            padding: 38px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 24px rgba(70, 100, 80, 0.12);
+        }
+
+        .opening .hook {
+            display: block;
+            color: #d7e6db;
+            font-size: 28px;
+            line-height: 1.35;
+            font-weight: bold;
+            margin-bottom: 25px;
+            letter-spacing: 0.2px;
+        }
+
+        .opening .body {
+            color: #a9b8ad;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .opening .body strong {
+            color: #d0ddd4;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1.7fr;
+            gap: 20px;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted #34463a;
+            padding: 10px 0;
+            font-size: 13px;
+        }
+
+        .models {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .model {
+            border: 1px solid #415848;
+            padding: 18px;
+            background: rgba(15, 20, 17, 0.8);
+        }
+
+        .model h3 {
+            margin-top: 0;
+            color: #b8cabb;
+        }
+
+        .score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #9fbeaa;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            border-bottom: 1px solid #2c3b31;
+            padding: 13px 10px;
+            text-align: left;
+        }
+
+        th {
+            color: #9fb6a6;
+            border-bottom: 1px solid #506856;
+        }
+
+        .timeline {
+            margin-top: 10px;
+        }
+
+        .trial {
+            border-left: 2px solid #506856;
+            padding: 5px 0 20px 25px;
+            position: relative;
+        }
+
+        .trial::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #6c8c74;
+            background: #080b09;
+            border-radius: 50%;
+        }
+
+        .trial-number {
+            display: inline-block;
+            border: 1px solid #506856;
+            padding: 5px 10px;
+            margin-bottom: 8px;
+            color: #a7bcae;
+        }
+
+        .trial-title {
+            font-weight: bold;
+            color: #c2d1c6;
+        }
+
+        .full-width {
+            margin-top: 20px;
+        }
+
+        .response {
+            border: 1px solid #34463a;
+            padding: 20px;
+            line-height: 1.8;
+            font-size: 13px;
+            white-space: pre-wrap;
+            color: #a9b8ad;
+            background: #0b0f0c;
+        }
+
+        .tag {
+            border: 1px solid #506856;
+            padding: 4px 8px;
+            font-size: 11px;
+            display: inline-block;
+            margin-right: 5px;
+            color: #a7bcae;
+        }
+
+        footer {
+            margin-top: 25px;
+            padding: 15px;
+            border: 1px solid #2c3b31;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #68796d;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .models {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                border-bottom: 1px solid #2c3b31;
+            }
+
+            .opening {
+                padding: 25px;
+            }
+
+            .opening .hook {
+                font-size: 22px;
+            }
+
+            .opening .body {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+
+    <header>
+        <h1>AI STRATEGY BENCHMARKS</h1>
+
+        <div class="subtitle">
+            EVALUATING LANGUAGE-MODEL DECISION-MAKING IN NATIONAL SECURITY SCENARIOS
+        </div>
+    </header>
+
+
+    <nav>
+        <a href="index.html">OVERVIEW</a>
+        <a href="methodology.html">METHODOLOGY AND RATIONALE</a>
+        <a href="scenarios.html">SCENARIOS</a>
+        <a href="results2.html">RESULTS</a>
+        <a href="next_steps.html">DISCUSSION AND NEXT STEPS</a>
+        <a href="appendix_results.html">FULL RESULTS</a>
+    </nav>
+
+    <!-- FEATURED INTRO -->
+
+    <div class="opening">
+
+        <span class="hook">
+            History repeats, and so does your model.
+        </span>
+
+        <div class="body">
+
+            From Eden labeling Nasser a Hitler to Johnson’s misplaced
+            dominoes, a misapplied analogy can decide policy before the
+            analysis begins.
+
+            <br><br>
+
+            <strong>[Benchmark Name]</strong> measures whether a model
+            discloses the historical precedent it retrieves when answering
+            estimative questions national security staff actually ask.
+
+            Across four models and four increasingly aggressive rewrites of
+            a Cuban Missile Crisis scenario, we found that estimates of
+            clash probability rose as the facts changed, yet the model never
+            volunteered the historical case it recognized throughout.
+
+            <br><br>
+
+            In other words, the analogy was <strong>invisible, immovable,
+            and immune to being instructed away.</strong>
+
+            While models excel at analogical reasoning, decisionmakers and
+            their staff who increasingly turn to them for second opinions
+            under deadline must know what case is framing the answer.
+
+            <br><br>
+
+            Otherwise, the second opinion is a more confident first one in a
+            different voice.
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        <span>AI STRATEGY BENCHMARKS // ALL RIGHTS RESERVED 2026</span>
+    </footer>
+
+</div>
+
+
+<!-- SUBTLE MATRIX EFFECT -->
+
+<script>
+
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const characters =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = [];
+
+    for (let i = 0; i < columns; i++) {
+        drops[i] =
+            Math.random() * canvas.height / fontSize;
+    }
+
+    function drawMatrix() {
+
+        ctx.fillStyle = "rgba(8, 11, 9, 0.10)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#6f8f78";
+        ctx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+
+            const character =
+                characters[
+                    Math.floor(
+                        Math.random() * characters.length
+                    )
+                ];
+
+            ctx.fillText(
+                character,
+                i * fontSize,
+                drops[i] * fontSize
+            );
+
+            if (
+                drops[i] * fontSize > canvas.height &&
+                Math.random() > 0.975
+            ) {
+                drops[i] = 0;
+            }
+
+            drops[i]++;
+        }
+    }
+
+    setInterval(drawMatrix, 60);
+
+    window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+</script>
+
+</body>
+</html>
+```
+
