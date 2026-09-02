@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's next — AnchorBench</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0B1017;
+  --panel:#101823;
+  --panel-2:#0D141D;
+  --line:#1E2A38;
+  --line-hi:#31435A;
+  --text:#D3DAE4;
+  --muted:#8794A6;
+  --bone:#EFEAE0;
+  --amber:#E8A94C;
+  --teal:#79B4C2;
+
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+#ghosts{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 70% at 18% -10%, rgba(232,169,76,.11), transparent 60%),
+    radial-gradient(90% 60% at 90% 0%, rgba(121,180,194,.07), transparent 65%);
+}
+
+.wrap{
+  position:relative;z-index:1;
+  width:min(1180px,92%);margin:0 auto;padding:0 0 72px;
+}
+
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+
+/* ---------- masthead ---------- */
+
+.masthead{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:14px 20px;
+  padding:30px 0 22px;border-bottom:1px solid var(--line);
+}
+
+.mark{font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:-.01em;color:var(--bone);}
+.mark span{color:var(--amber);}
+.mark-sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em;}
+
+nav{margin-left:auto;display:flex;flex-wrap:wrap;gap:4px;}
+
+nav a{
+  font-family:var(--mono);font-size:12.5px;text-decoration:none;color:var(--muted);
+  padding:7px 13px;border:1px solid transparent;border-radius:2px;
+  transition:color .15s,border-color .15s,background .15s;
+}
+
+nav a:hover{color:var(--bone);border-color:var(--line-hi);background:rgba(121,180,194,.06);}
+nav a[aria-current="page"]{color:var(--ink);background:var(--amber);border-color:var(--amber);}
+
+/* ---------- page head ---------- */
+
+.pagehead{padding:64px 0 48px;border-bottom:1px solid var(--line);}
+
+.pagehead h1{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(2rem,4.8vw,3.4rem);
+  line-height:1.06;letter-spacing:-.025em;color:var(--bone);
+  margin:0;max-width:17ch;text-wrap:balance;
+}
+
+.pagehead p{margin:26px 0 0;max-width:62ch;font-size:17px;line-height:1.72;color:#B6C0CE;}
+
+/* ---------- sections ---------- */
+
+section{padding:56px 0;border-bottom:1px solid var(--line);}
+section:last-of-type{border-bottom:none;}
+
+.kicker{font-family:var(--mono);font-size:12px;color:var(--amber);margin:0 0 14px;}
+
+h2{
+  font-family:var(--serif);font-weight:500;font-size:28px;
+  letter-spacing:-.015em;color:var(--bone);margin:0 0 20px;
+}
+
+p{max-width:68ch;margin:0 0 20px;}
+p:last-child{margin-bottom:0;}
+
+.lead{font-size:17px;color:#C1CAD7;}
+
+.dim{color:var(--muted);}
+
+b,strong{color:var(--bone);font-weight:600;}
+
+/* ---------- number readouts ---------- */
+
+.readouts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;
+  overflow:hidden;margin:38px 0 0;
+}
+
+.readout{background:var(--panel-2);padding:24px;}
+
+.readout .num{
+  font-family:var(--serif);font-weight:500;
+  font-size:44px;line-height:1;letter-spacing:-.03em;
+  color:var(--amber);
+}
+
+.readout .num small{font-size:20px;color:var(--muted);letter-spacing:0;}
+
+.readout .cap{
+  margin-top:12px;font-size:14px;color:var(--muted);max-width:30ch;
+}
+
+.readout.cool .num{color:var(--teal);}
+
+/* ---------- two reasons ---------- */
+
+.reasons{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:36px;margin-top:8px;
+}
+
+.reason{border-top:2px solid var(--line-hi);padding-top:20px;}
+
+.reason h3{
+  font-family:var(--serif);font-weight:500;font-size:20px;
+  color:var(--bone);margin:0 0 12px;letter-spacing:-.01em;
+}
+
+.reason p{max-width:44ch;font-size:15.5px;color:#B6C0CE;}
+
+/* ---------- roadmap ---------- */
+
+.roadmap{list-style:none;margin:34px 0 0;padding:0;}
+
+.roadmap li{
+  display:grid;
+  grid-template-columns:minmax(180px,1fr) 2.4fr;
+  gap:14px 36px;
+  padding:26px 0;
+  border-top:1px solid var(--line);
+  align-items:start;
+}
+
+.roadmap li:last-child{border-bottom:1px solid var(--line);}
+
+.roadmap h3{
+  font-family:var(--serif);font-weight:500;font-size:20px;
+  color:var(--bone);margin:0;letter-spacing:-.01em;
+}
+
+.roadmap p{margin:0;max-width:62ch;font-size:15.5px;color:#B6C0CE;}
+
+/* ---------- callout ---------- */
+
+.callout{
+  border-left:2px solid var(--amber);
+  background:rgba(232,169,76,.05);
+  padding:22px 26px;margin:32px 0 0;max-width:70ch;
+}
+
+.callout p{margin:0;font-size:16px;color:#C7D0DC;}
+
+/* ---------- back link ---------- */
+
+.back{
+  display:inline-flex;align-items:baseline;gap:12px;
+  margin-top:44px;padding:14px 22px;
+  border:1px solid var(--line-hi);border-radius:2px;
+  font-family:var(--mono);font-size:13px;
+  text-decoration:none;color:var(--bone);
+  transition:background .15s,border-color .15s;
+}
+
+.back:hover{background:rgba(232,169,76,.08);border-color:var(--amber);}
+.back span{color:var(--muted);}
+
+/* ---------- footer ---------- */
+
+footer{
+  display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;
+  padding-top:30px;font-family:var(--mono);font-size:11.5px;color:#5F6B7B;
+}
+
+@media (max-width:860px){
+  nav{margin-left:0;width:100%;}
+  .pagehead{padding:44px 0 36px;}
+  .roadmap li{grid-template-columns:1fr;gap:10px;}
+}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+
+<body>
+
+<canvas id="ghosts" aria-hidden="true"></canvas>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div>
+      <div class="mark">Anchor<span>Bench</span></div>
+      <div class="mark-sub">Evaluating language models in national security decisions</div>
+    </div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="methodology.html">What we did</a>
+      <a href="results2.html">What we found</a>
+      <a href="next_steps.html" aria-current="page">What's next</a>
+    </nav>
+  </div>
+
+  <div class="pagehead">
+    <h1>So, what comes next?</h1>
+    <p>
+      One ladder, one anchor case, four models. Enough to say something about direction and to
+      show the instrument works. Not yet a benchmark.
+    </p>
+  </div>
+
+  <section>
+    <div class="kicker">What we showed</div>
+    <h2>The model reads the crisis you give it</h2>
+
+    <p class="lead">
+      When you slowly strip safeguards away, the estimate moves. In every model we tested, the
+      estimate moved by 20 to 32 points across the full ladder. We set out to test whether
+      models anchor on a famous case instead of the facts in front of them, and the data did
+      not support it. For a staffer at 9 p.m. writing a memo due the next morning, that is good
+      news. The model is not ignoring your scenario.
+    </p>
+
+    <div class="readouts">
+      <div class="readout">
+        <div class="num">20–32<small> pts</small></div>
+        <div class="cap">Movement across the full ladder, in every model tested</div>
+      </div>
+      <div class="readout cool">
+        <div class="num">0</div>
+        <div class="cap">Rationales that mentioned the Cuban Missile Crisis</div>
+      </div>
+      <div class="readout cool">
+        <div class="num">&lt;10<small> pts</small></div>
+        <div class="cap">Level shift from instructing the model to ignore history, with the slope unchanged</div>
+      </div>
+    </div>
+
+    <p style="margin-top:38px">
+      What it will not tell you is what else it was reading. No model ever mentioned the Cuban
+      Missile Crisis in a single rationale. Asked afterward, every model named it at every rung
+      and through every rewrite. So the assessment on your screen has an input you cannot see,
+      and it stays hidden whether you rewrite the scenario or instruct the model to ignore
+      history.
+    </p>
+
+    <p>
+      We did not find evidence that the recognized case distorted the estimate here. We also
+      could have missed the evidence. Establishing that a number came from a precedent rather
+      than from the facts means rerunning the same crisis with the precedent removed, and no
+      user can build that comparison on deadline.
+    </p>
+
+    <div class="callout">
+      <p>
+        What we can say is that the precedent is present, the model knows it, and the output
+        gives you no way to tell.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Why it matters</div>
+    <h2>Two reasons a staffer will recognize</h2>
+
+    <div class="reasons">
+      <div class="reason">
+        <h3>It takes the argument off the table</h3>
+        <p>
+          Analysts already know how to fight about analogies. Name the precedent, argue the
+          fit, decide. A model that hands you a number with the precedent unstated removes that
+          step entirely.
+        </p>
+      </div>
+      <div class="reason">
+        <h3>It looks like confirmation</h3>
+        <p>
+          If the room is already reaching for Cuba, the model agreeing with the room reads as
+          independent corroboration rather than the same instinct arriving twice.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">The ask</div>
+    <h2>What the prize would fund</h2>
+
+    <ul class="roadmap">
+
+      <li>
+        <h3>More cases</h3>
+        <p>
+          One ladder is not a benchmark. We plan four more, drawn from precedents that carry
+          different weight in different training corpora: Munich 1938, the Korean War, the 1996
+          Taiwan Strait crisis, and the Falklands.
+        </p>
+      </li>
+
+      <li>
+        <h3>A ladder that runs the other way</h3>
+        <p>
+          In the Cuba ladder, every mechanism we strip makes a clash more likely, so the
+          estimate should climb. A model that simply raises its number as bad news accumulates
+          would score the same as one that reasons. We need a case where stripping the
+          mechanisms should push the estimate down, where the safeguards we remove were the
+          things making conflict more likely rather than less. Only a model tracking the causal
+          content will follow both directions.
+        </p>
+      </li>
+
+      <li>
+        <h3>More trials per cell</h3>
+        <p>
+          Three runs gave us standard deviations above 15 in several cells. That supports a
+          claim about direction and not much more. Ten runs per cell would let us put intervals
+          on the slopes and say which per-rung movements are real.
+        </p>
+      </li>
+
+      <li>
+        <h3>A cleaner way to score recognition</h3>
+        <p>
+          Right now we count whether the model named Cuba in its rationale, and separately
+          whether it named Cuba when asked. That gives a gap, but it is coarse. We want to score
+          partial recognition, which case gets named when it is not Cuba, and whether the naming
+          changes as mechanisms come out. The elicitation prompt also needs testing on its own,
+          since how the question is asked may set how much the model discloses.
+        </p>
+      </li>
+
+      <li>
+        <h3>More models, including frontier</h3>
+        <p>
+          We ran four. Adding closed frontier models tests whether disclosure improves with
+          capability, which is the question that decides whether this benchmark stays useful. It
+          also lets us test the mitigation everyone assumes works: if two models reach for the
+          same precedent, checking one against the other buys nothing.
+        </p>
+      </li>
+
+      <li>
+        <h3>A placebo condition</h3>
+        <p>
+          Nullify framing facts rather than mechanisms. If the estimate rises there too, the
+          slope is tracking hedging density rather than causal content, and we need to know
+          that.
+        </p>
+      </li>
+
+    </ul>
+
+    <a class="back" href="index.html">Start over <span>Overview</span></a>
+  </section>
+
+  <footer>
+    <span>AnchorBench, 2026</span>
+    <span>Submitted to the ChinaTalk Evals for the Situation Room contest</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById("ghosts");
+  const ctx = canvas.getContext("2d");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const tokens = [
+    "CUBA 1962","MUNICH 1938","SUEZ 1956","SARAJEVO 1914","KOREA 1950",
+    "TONKIN 1964","BERLIN 1961","QUARANTINE","SUDETENLAND","THE DOMINOES",
+    "KHRUSHCHEV","EXCOMM","FALKLANDS 1982","U-2, OCTOBER 27","APPEASEMENT"
+  ];
+
+  let w, h, dpr, ghosts = [];
+
+  function build(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth = window.innerWidth;
+    h = canvas.clientHeight = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = w < 700 ? 9 : 16;
+    ghosts = [];
+    for (let i = 0; i < count; i++){
+      ghosts.push({
+        text: tokens[i % tokens.length],
+        x: Math.random() * w,
+        y: Math.random() * h,
+        size: 13 + Math.random() * 30,
+        vy: -(0.04 + Math.random() * 0.10),
+        vx: (Math.random() - 0.5) * 0.05,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.0016 + Math.random() * 0.0022
+      });
+    }
+  }
+
+  function frame(t){
+    ctx.clearRect(0, 0, w, h);
+    for (const g of ghosts){
+      g.y += g.vy;
+      g.x += g.vx;
+      if (g.y < -60) { g.y = h + 40; g.x = Math.random() * w; }
+      if (g.x < -260) g.x = w + 40;
+      if (g.x > w + 260) g.x = -40;
+
+      const pulse = 0.5 + 0.5 * Math.sin(g.phase + t * g.speed);
+      ctx.font = "500 " + g.size + "px 'IBM Plex Mono', monospace";
+      ctx.fillStyle = "rgba(190, 214, 226," + (0.030 + pulse * 0.055) + ")";
+      ctx.fillText(g.text, g.x, g.y);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function still(){
+    ctx.clearRect(0, 0, w, h);
+    for (const g of ghosts){
+      ctx.font = "500 " + g.size + "px 'IBM Plex Mono', monospace";
+      ctx.fillStyle = "rgba(190, 214, 226, 0.055)";
+      ctx.fillText(g.text, g.x, g.y);
+    }
+  }
+
+  build();
+  if (reduce) { still(); } else { requestAnimationFrame(frame); }
+
+  let timer;
+  window.addEventListener("resize", function(){
+    clearTimeout(timer);
+    timer = setTimeout(function(){ build(); if (reduce) still(); }, 150);
+  });
+})();
+</script>
+
+</body>
+</html>

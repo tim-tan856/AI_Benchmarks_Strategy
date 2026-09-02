@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What we did — AnchorBench</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0B1017;
+  --panel:#101823;
+  --panel-2:#0D141D;
+  --line:#1E2A38;
+  --line-hi:#31435A;
+  --text:#D3DAE4;
+  --muted:#8794A6;
+  --bone:#EFEAE0;
+  --amber:#E8A94C;
+  --teal:#79B4C2;
+
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+#ghosts{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(120% 70% at 18% -10%, rgba(232,169,76,.11), transparent 60%),
+    radial-gradient(90% 60% at 90% 0%, rgba(121,180,194,.07), transparent 65%);
+}
+
+.wrap{
+  position:relative;
+  z-index:1;
+  width:min(1180px,92%);
+  margin:0 auto;
+  padding:0 0 72px;
+}
+
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+
+/* ---------- masthead ---------- */
+
+.masthead{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:14px 20px;
+  padding:30px 0 22px;border-bottom:1px solid var(--line);
+}
+
+.mark{font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:-.01em;color:var(--bone);}
+.mark span{color:var(--amber);}
+.mark-sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em;}
+
+nav{margin-left:auto;display:flex;flex-wrap:wrap;gap:4px;}
+
+nav a{
+  font-family:var(--mono);font-size:12.5px;text-decoration:none;color:var(--muted);
+  padding:7px 13px;border:1px solid transparent;border-radius:2px;
+  transition:color .15s,border-color .15s,background .15s;
+}
+
+nav a:hover{color:var(--bone);border-color:var(--line-hi);background:rgba(121,180,194,.06);}
+nav a[aria-current="page"]{color:var(--ink);background:var(--amber);border-color:var(--amber);}
+
+/* ---------- page head ---------- */
+
+.pagehead{padding:64px 0 48px;border-bottom:1px solid var(--line);}
+
+.pagehead h1{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(2rem,4.6vw,3.3rem);
+  line-height:1.06;letter-spacing:-.025em;color:var(--bone);
+  margin:0;max-width:18ch;text-wrap:balance;
+}
+
+.pagehead p{
+  margin:26px 0 0;max-width:62ch;font-size:17px;line-height:1.72;color:#B6C0CE;
+}
+
+/* ---------- sections ---------- */
+
+section{padding:56px 0;border-bottom:1px solid var(--line);}
+
+.kicker{
+  font-family:var(--mono);font-size:12px;color:var(--amber);
+  margin:0 0 14px;
+}
+
+h2{
+  font-family:var(--serif);font-weight:500;font-size:28px;
+  letter-spacing:-.015em;color:var(--bone);margin:0 0 12px;
+}
+
+h3{
+  font-family:var(--serif);font-weight:500;font-size:21px;
+  letter-spacing:-.01em;color:var(--bone);margin:44px 0 12px;
+}
+
+p{max-width:68ch;margin:0 0 18px;}
+p.wide{max-width:78ch;}
+
+.sec-note{margin:0 0 36px;max-width:66ch;color:var(--muted);font-size:15px;}
+
+.dim{color:var(--muted);}
+
+ul.plain{
+  list-style:none;margin:0 0 22px;padding:0;max-width:68ch;
+}
+
+ul.plain li{
+  position:relative;padding:9px 0 9px 24px;
+  border-bottom:1px solid var(--line);font-size:15px;
+}
+
+ul.plain li::before{
+  content:"";position:absolute;left:2px;top:18px;
+  width:6px;height:6px;background:var(--teal);border-radius:50%;
+}
+
+/* ---------- numbered criteria ---------- */
+
+.criteria{list-style:none;margin:0;padding:0;counter-reset:crit;}
+
+.criterion{
+  counter-increment:crit;
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:0 28px;
+  padding:34px 0;
+  border-top:1px solid var(--line);
+}
+
+.criterion:last-child{border-bottom:1px solid var(--line);}
+
+.criterion::before{
+  content:counter(crit,decimal-leading-zero);
+  font-family:var(--serif);
+  font-size:34px;
+  line-height:1;
+  color:var(--amber);
+  opacity:.85;
+}
+
+.criterion h3{margin:0 0 14px;font-size:22px;}
+.criterion p:last-child{margin-bottom:0;}
+
+/* ---------- conditions ---------- */
+
+.conditions{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:3px;
+  overflow:hidden;
+}
+
+.cond{background:var(--panel-2);padding:24px;}
+
+.cond .tag{
+  font-family:var(--mono);font-size:11.5px;color:var(--amber);
+  display:block;margin-bottom:10px;
+}
+
+.cond h4{
+  font-family:var(--serif);font-weight:500;font-size:19px;
+  color:var(--bone);margin:0 0 10px;letter-spacing:-.01em;
+}
+
+.cond p{font-size:14.5px;color:#AEB9C7;margin:0 0 14px;max-width:none;}
+.cond p:last-child{margin-bottom:0;}
+
+.variants{
+  list-style:none;margin:0;padding:0;
+  font-family:var(--mono);font-size:12.5px;
+}
+
+.variants li{
+  display:flex;gap:12px;padding:7px 0;border-top:1px solid var(--line);
+}
+
+.variants b{color:var(--teal);font-weight:500;}
+.variants span{color:var(--muted);}
+
+/* ---------- mechanism table ---------- */
+
+.scroller{overflow-x:auto;}
+
+table{
+  width:100%;min-width:620px;border-collapse:collapse;font-size:14.5px;
+}
+
+th{
+  text-align:left;font-family:var(--mono);font-weight:500;
+  color:var(--muted);font-size:11.5px;
+  padding:0 18px 10px 0;border-bottom:1px solid var(--line-hi);vertical-align:bottom;
+}
+
+td{padding:16px 18px 16px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+
+td.id{
+  font-family:var(--mono);font-size:12.5px;color:var(--amber);white-space:nowrap;width:56px;
+}
+
+td.keep{color:var(--text);}
+td.null{color:var(--muted);}
+
+/* ---------- callout ---------- */
+
+.callout{
+  border-left:2px solid var(--amber);
+  background:rgba(232,169,76,.05);
+  padding:20px 24px;
+  margin:28px 0;
+  max-width:70ch;
+}
+
+.callout p{margin:0;font-size:15.5px;color:#C7D0DC;}
+
+/* ---------- figure ---------- */
+
+figure{
+  margin:36px 0 0;
+  border:1px solid var(--line);
+  background:var(--panel-2);
+  border-radius:3px;
+  padding:24px;
+}
+
+figure img{display:block;max-width:100%;height:auto;margin:0 auto;}
+
+figcaption{
+  font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  margin-top:18px;padding-top:16px;border-top:1px solid var(--line);
+}
+
+/* ---------- next link ---------- */
+
+.next{
+  display:inline-flex;align-items:baseline;gap:12px;
+  margin-top:44px;padding:14px 22px;
+  border:1px solid var(--line-hi);border-radius:2px;
+  font-family:var(--mono);font-size:13px;
+  text-decoration:none;color:var(--bone);
+  transition:background .15s,border-color .15s;
+}
+
+.next:hover{background:rgba(232,169,76,.08);border-color:var(--amber);}
+.next span{color:var(--muted);}
+
+/* ---------- footer ---------- */
+
+footer{
+  display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;
+  padding-top:30px;font-family:var(--mono);font-size:11.5px;color:#5F6B7B;
+}
+
+footer a{color:var(--muted);text-decoration:none;}
+footer a:hover{color:var(--amber);}
+
+@media (max-width:860px){
+  nav{margin-left:0;width:100%;}
+  .pagehead{padding:44px 0 36px;}
+  .criterion{grid-template-columns:1fr;gap:14px;}
+  .criterion::before{font-size:28px;}
+}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+
+<body>
+
+<canvas id="ghosts" aria-hidden="true"></canvas>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div>
+      <div class="mark">Anchor<span>Bench</span></div>
+      <div class="mark-sub">Evaluating language models in national security decisions</div>
+    </div>
+    <nav>
+      <a href="index.html" aria-current="page">Overview</a>
+      <a href="what_we_did.html">What we did</a>
+      <a href="what_we_found.html">What we found</a>
+      <a href="whats_next.html">What's next</a>
+    </nav>
+  </div>
+
+  <div class="pagehead">
+    <h1>How we picked the question, and how we built the test</h1>
+    <p>
+      Strategic decision-making has a thin body of evidence to draw on, so we started by
+      asking what a benchmark in this space would have to satisfy before it was worth
+      building. Three criteria survived. They point at a specific design.
+    </p>
+  </div>
+
+  <section>
+    <div class="kicker">Approach</div>
+    <h2>Three criteria</h2>
+    <p class="sec-note">
+      Each one is a filter. An idea had to pass all three to be worth a week of work.
+    </p>
+
+    <ol class="criteria">
+
+      <li class="criterion">
+        <div>
+          <h3>Does this test something models are good at, on a job people actually do?</h3>
+          <p>
+            Because there is little prior work on strategic decision-making, we started with
+            other domains to build foundational assumptions. Nearly every benchmark we looked
+            at falls into one of four categories.
+          </p>
+          <ul class="plain">
+            <li><b>Capability.</b> Can the model do X at all, or how well and how far can it do X?</li>
+            <li><b>Propensity.</b> Does it ever do X, and how often under what conditions?</li>
+            <li><b>Calibration.</b> Is the output coherent, and if not, how far off is it?</li>
+            <li><b>Responsiveness.</b> Did it flip its position, and how far did it move when pushed?</li>
+          </ul>
+          <p>
+            Ours had to land in one of these. Most of our early ideas dropped the model into a
+            rich scenario with too many moving parts to attribute any result to anything.
+          </p>
+          <p>
+            So we looked for a topic sitting between two things: something general-purpose
+            models do well, and a task a decisionmaker or their staff would plausibly hand to
+            one. Analogical reasoning — recognizing what a situation resembles and transferring
+            inferences to it — is one of those strengths. Both authors have watched senior staff
+            do estimative work under deadline. Will this hold? What happens if we do this? How
+            will the other side read it? A model is an attractive option at 6 p.m.: it holds a
+            large corpus of historical precedent, it is always available, and it reads as a
+            neutral third party with no equities to defend.
+          </p>
+          <div class="callout">
+            <p>
+              Which raises the question. Does the model reason from the scenario in front of
+              it, or reproduce the pattern the scenario resembles? Not whether it uses priors,
+              but whether it updates when the scenario contradicts what the prior expects.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="criterion">
+        <div>
+          <h3>Can the person using the model check the answer themselves?</h3>
+          <p>
+            A benchmark is only worth building if the user cannot easily verify the output on
+            their own, right when they need it. Four things tend to get in the way of
+            self-checking.
+          </p>
+          <ul class="plain">
+            <li>The work takes too long to do by hand.</li>
+            <li>The team lacks the expertise to judge it.</li>
+            <li>The comparison cannot realistically be run.</li>
+            <li>The task is too repetitive for anyone to sit through.</li>
+          </ul>
+          <p>
+            Tasks that fail all four are ones an analyst can eyeball in a few minutes:
+            summarizing a document, sorting reports into categories they already use,
+            translating something a colleague can check. Useful work, but the user finds out
+            immediately whether the model was right, so measuring it buys little.
+          </p>
+          <p>
+            Historical anchoring is the opposite case. The output arrives as a single
+            assessment, written as narrative analysis, citing the scenario's own facts. Showing
+            that the estimate came from a pattern rather than from those facts means rerunning
+            the scenario with the pattern removed — a counterfactual nobody constructs under
+            deadline.
+          </p>
+        </div>
+      </li>
+
+      <li class="criterion">
+        <div>
+          <h3>Can we actually measure the change?</h3>
+          <p>
+            Without a fixed procedure, the benchmark becomes an interesting thing to observe
+            rather than a test. Measurement here needs three elements.
+          </p>
+          <ul class="plain">
+            <li>A number the model has to commit to.</li>
+            <li>A manipulation that should move it.</li>
+            <li>Everything else held constant, so the movement can be attributed.</li>
+          </ul>
+          <p>
+            Our design asks for a probability up front, strips one causal mechanism at a time as
+            the scenarios progress, and freezes the rest of the scenario word for word.
+          </p>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <section>
+    <div class="kicker">Methodology</div>
+    <h2>Scenario construction</h2>
+    <p class="sec-note">
+      We needed a number that could move, a comparison the user cannot run alone, and
+      everything else held still so we could tell what moved.
+    </p>
+
+    <p class="wide">
+      Each scenario contains two kinds of facts. <b>Framing</b> is everything that identifies
+      the situation and makes the question answerable: two powers, a small client state at the
+      center, the decision structure, the two options, the question itself. Framing language
+      stays identical across all six rungs.
+    </p>
+
+    <p class="wide">
+      <b>Mechanisms</b> are the facts the historical outcome depended on. The test is simple:
+      take this away, and does the crisis end differently? The nuclear balance, the bipolar
+      system, and the pressure on Kennedy from his generals are all real features of October
+      1962, but they sit above the level of the scenario or are not load-bearing enough that
+      the crisis fails without them. Five mechanisms passed.
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Mechanism</th>
+            <th>Present</th>
+            <th>Nullified</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="id">M1</td>
+            <td>Channel</td>
+            <td class="keep">The two leaders can talk directly</td>
+            <td class="null">Messages go through intermediaries and public statements</td>
+          </tr>
+          <tr>
+            <td class="id">M2</td>
+            <td>Verification</td>
+            <td class="keep">Each side can see whether the other has stopped</td>
+            <td class="null">A halt shows up days later, through third-party reporting</td>
+          </tr>
+          <tr>
+            <td class="id">M3</td>
+            <td>Protocol</td>
+            <td class="keep">A declared line with rules about who fires and when</td>
+            <td class="null">No line, and rules of engagement are unset</td>
+          </tr>
+          <tr>
+            <td class="id">M4</td>
+            <td>Control</td>
+            <td class="keep">Commanders cannot fire without approval</td>
+            <td class="null">Fire authority delegated to theater level</td>
+          </tr>
+          <tr>
+            <td class="id">M5</td>
+            <td>Exit</td>
+            <td class="keep">Something the adversary can be given for backing down</td>
+            <td class="null">Neither side holds a concession the other has asked for</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Why we nullified rather than deleted</h3>
+    <p class="wide">
+      A deleted fact does not read as false. It reads as unspecified, and that vacuum lets the
+      model fill the gap from what it expects the crisis to contain. Deletion would also open a
+      progressively wider hole as the rungs advanced, so later rungs would differ from earlier
+      ones in length and specificity as well as in substance. Each rung instead replaces the
+      mechanism with a sentence asserting its absence.
+    </p>
+
+    <h3>The prompt</h3>
+    <p class="wide">
+      Identical across every rung and condition, in two parts. The model gives a probability
+      from 0 to 100 on the first line, then a four-sentence rationale. The number forces a
+      commitment and makes movement across rungs measurable. The rationale shows which facts
+      the model treated as load-bearing.
+    </p>
+  </section>
+
+  <section>
+    <div class="kicker">Conditions</div>
+    <h2>Three ways of presenting the same facts</h2>
+    <p class="sec-note">
+      Each condition runs the full six-rung ladder. Only the handling of the historical case
+      differs.
+    </p>
+
+    <div class="conditions">
+
+      <div class="cond">
+        <span class="tag">Condition 1</span>
+        <h4>Cue present</h4>
+        <p>
+          The scenario as written, with no added instruction. This is the primary measurement
+          and the closest thing to what a real query looks like.
+        </p>
+      </div>
+
+      <div class="cond">
+        <span class="tag">Condition 2</span>
+        <h4>Cue removed</h4>
+        <p>
+          Four rewrites of the same causal facts. Each preserves the causal structure exactly
+          and changes only the details a reader notices first.
+        </p>
+        <ul class="variants">
+          <li><b>D0</b><span>Numerals change</span></li>
+          <li><b>D1</b><span>Platform changes</span></li>
+          <li><b>D2</b><span>Domain moves</span></li>
+          <li><b>D3</b><span>All three at once</span></li>
+        </ul>
+      </div>
+
+      <div class="cond">
+        <span class="tag">Condition 3</span>
+        <h4>Cue suppressed</h4>
+        <p>
+          Cue present plus one line: reason only from the facts provided. A cheap test of the
+          first fix anyone would try.
+        </p>
+        <p class="dim">
+          If a single instruction closes the gap, the mitigation is something any staffer can
+          paste in.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      <p>
+        The question the disguise set asks is how much surface a scenario can shed before the
+        model stops seeing the case underneath. If recognition tracks surface detail, it should
+        fall off as the rewrites get more aggressive. If it tracks the shape of the decision, it
+        should hold.
+      </p>
+    </div>
+
+    <figure>
+      <img src="image.png" alt="Grid of six rungs against three conditions, showing which mechanisms are nullified in each cell.">
+      <figcaption>The full design. Rungs run down, conditions run across.</figcaption>
+    </figure>
+
+    <a class="next" href="results2.html">What we found <span>Results</span></a>
+  </section>
+
+  <footer>
+    <span>AnchorBench, 2026</span>
+    <span>Submitted to the ChinaTalk Evals for the Situation Room contest</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById("ghosts");
+  const ctx = canvas.getContext("2d");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const tokens = [
+    "CUBA 1962","MUNICH 1938","SUEZ 1956","SARAJEVO 1914","KOREA 1950",
+    "TONKIN 1964","BERLIN 1961","QUARANTINE","SUDETENLAND","THE DOMINOES",
+    "KHRUSHCHEV","EXCOMM","FALKLANDS 1982","U-2, OCTOBER 27","APPEASEMENT"
+  ];
+
+  let w, h, dpr, ghosts = [];
+
+  function build(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth = window.innerWidth;
+    h = canvas.clientHeight = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = w < 700 ? 9 : 16;
+    ghosts = [];
+    for (let i = 0; i < count; i++){
+      ghosts.push({
+        text: tokens[i % tokens.length],
+        x: Math.random() * w,
+        y: Math.random() * h,
+        size: 13 + Math.random() * 30,
+        vy: -(0.04 + Math.random() * 0.10),
+        vx: (Math.random() - 0.5) * 0.05,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.0016 + Math.random() * 0.0022
+      });
+    }
+  }
+
+  function frame(t){
+    ctx.clearRect(0, 0, w, h);
+    for (const g of ghosts){
+      g.y += g.vy;
+      g.x += g.vx;
+      if (g.y < -60) { g.y = h + 40; g.x = Math.random() * w; }
+      if (g.x < -260) g.x = w + 40;
+      if (g.x > w + 260) g.x = -40;
+
+      const pulse = 0.5 + 0.5 * Math.sin(g.phase + t * g.speed);
+      ctx.font = "500 " + g.size + "px 'IBM Plex Mono', monospace";
+      ctx.fillStyle = "rgba(190, 214, 226," + (0.030 + pulse * 0.055) + ")";
+      ctx.fillText(g.text, g.x, g.y);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function still(){
+    ctx.clearRect(0, 0, w, h);
+    for (const g of ghosts){
+      ctx.font = "500 " + g.size + "px 'IBM Plex Mono', monospace";
+      ctx.fillStyle = "rgba(190, 214, 226, 0.055)";
+      ctx.fillText(g.text, g.x, g.y);
+    }
+  }
+
+  build();
+  if (reduce) { still(); } else { requestAnimationFrame(frame); }
+
+  let timer;
+  window.addEventListener("resize", function(){
+    clearTimeout(timer);
+    timer = setTimeout(function(){ build(); if (reduce) still(); }, 150);
+  });
+})();
+</script>
+
+</body>
+</html>
